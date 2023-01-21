@@ -40,6 +40,21 @@ public class ClassRoom {
         return treeCount;
     }
 
+    public static int Sum(Node root){
+        if(root == null){
+            return 0;
+        }
+
+        int leftSum = Sum(root.left);
+        int rightSum = Sum(root.left);
+
+        return leftSum + rightSum + root.data;
+
+
+    }
+
+
+
     public static void main(String[] args) {
         Node root = new Node(1);
         root.left = new Node(2);
@@ -49,8 +64,9 @@ public class ClassRoom {
         root.right.left  = new Node(6);
         root.right.right = new Node(7);
 
-        System.out.println("Height of tree "+height(root));
-        System.out.println("Number nodes in tree "+count(root));
+//        System.out.println("Height of tree "+height(root));
+//        System.out.println("Number nodes in tree "+count(root));
+        System.out.println("Sum of nodes is : " + Sum(root)) ;
 
 
     }
