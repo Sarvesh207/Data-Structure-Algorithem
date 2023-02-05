@@ -2,6 +2,7 @@ package Trees;
 
 import Queue.QueueC;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -12,7 +13,7 @@ public class ClassRoom {
         Node left;
         Node right;
 
-        public Node(int dat){
+        public Node(int data){
             this.data = data;
             this.left = null;
             this.right = null;
@@ -176,8 +177,108 @@ public class ClassRoom {
 
     }
 
+    public static void Klevel(Node root, int level, int k){
+        if(root == null){
+            return;
+        }
+        if(level == k){
+            System.out.print(root.data+" ");
+            return;
+        }
+        Klevel(root.left, level+1, k);
+        Klevel(root.right,level+1, k);
 
-    public static void main(String[] args) {
+    }
+
+//    public  static boolean getPath(Node root, int n, ArrayList<Node> path){
+//        if(root == null){
+//            return false;
+//        }
+//        path.add(root);
+//        if(root.data == n){
+//            return true;
+//        }
+//
+//        boolean foundLeft = getPath(root.left, n, path);
+//        boolean foundRight = getPath(root.right, n, path);
+//
+//        if(foundRight || foundLeft){
+//            return true;
+//        }
+//
+//        path.remove(path.size()-1);
+//        return false;
+//
+//    }
+//
+//    public static Node lca(Node root , int n1, int n2){
+//        ArrayList<Node> path1 = new ArrayList<>();
+//        ArrayList<Node> path2 = new ArrayList<>();
+//
+//        getPath(root, n1, path1);
+//        getPath(root, n2, path1);
+//
+//
+//        int i = 0;
+//        for(; i<path1.size() && i<path2.size(); i++ ){
+//            if(path1.get(i) != path2.get(i)){
+//                break;
+//            }
+//        }
+//        Node lca = path1.get(i-1);
+//        return lca;
+//    }
+
+
+
+        public static Node lca2(Node root, int n1, int n2){
+        if(root == null || root.data == n1 || root.data == n2){
+            return root;
+        }
+
+        Node leftLca = lca2(root.left, n1, n2);
+        Node rightLca = lca2(root.right, n1, n2);
+        if(leftLca == null){
+            return rightLca;
+        }
+        if(rightLca == null){
+            return leftLca;
+        }
+
+        return root;
+        }
+
+        /// min distance bet two node
+        public static int localDist(Node root, int n){
+            if(root == null){
+                return -1;
+            }
+
+            if(root.data == n){
+                return 0;
+            }
+
+            int leftDist = localDist(root.left, n);
+            int rightDist = localDist(root.right, n);
+
+            if(leftDist == -1 && rightDist == -1){
+                return -1;
+            } else if(leftDist == -1){
+                return rightDist+1;
+            } else{
+                return leftDist+1;
+            }
+        }
+        public static int minDist(Node root, int n1, int n2){
+            Node lca = lca2(root, n1, n2);
+            int leftDist = localDist(lca, n1);
+            int rightDist = localDist(lca, n2);
+
+            return leftDist + rightDist;
+        }
+
+
+        public static void main(String[] args) {
 
         /*    1
             /    \
@@ -194,8 +295,8 @@ public class ClassRoom {
         root.right.right = new Node(7);
 
 
-        Node subRoot = new Node(2);
-        subRoot.left = new Node(4);
+//        Node subRoot = new Node(2);
+//        subRoot.left = new Node(4);
 //        subRoot.right = new Node(5);
 //        System.out.println("Height of tree "+height(root));
 //        System.out.println("Number nodes in tree "+count(root));
@@ -204,7 +305,14 @@ public class ClassRoom {
 //        System.out.println(diameter(root).diam);
         // is subtree indientical
 //        System.out.println(isSubtree(root, subRoot));
-        topView(root);
+//        topView(root);
+//        int k = 3;
+//        Klevel(root, 1, k );
+
+        int n1 = 4, n2 = 6;
+//        System.out.println(lca2(root, n1, n2).data);
+            System.out.println(minDist(root, n1, n2));
+
 
     }
 }
