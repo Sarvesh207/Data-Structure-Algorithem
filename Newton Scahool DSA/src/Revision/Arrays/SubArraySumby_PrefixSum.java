@@ -17,7 +17,7 @@ public class SubArraySumby_PrefixSum {
                 int start = i;
                 for(int j=i+1; j< arr.length; j++){
                     int end = j;
-                    currSum = start == 0 ? preFixSum[end] : preFixSum[end] -preFixSum[start - 1];
+                    currSum = start == 0 ? preFixSum[end] : preFixSum[end] -  preFixSum[start - 1];
                     if(max < currSum){
                         max = currSum;
                     }
