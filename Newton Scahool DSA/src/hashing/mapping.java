@@ -10,12 +10,12 @@ public class mapping {
         hm.put("us", 40);
         hm.put("pak", 20);
         hm.put("bangla", 15);
-        Set<String> keys = hm.keySet();
-        for (String k:keys
-             ) {
-            System.out.println("key = "+k+", value = "+hm.get(k));
-
-        }
+//        Set<String> keys = hm.keySet();
+//        for (String k:keys
+//             ) {
+//            System.out.println("key = "+k+", value = "+hm.get(k));
+//
+//        }
 //        System.out.println(keys);
 //        System.out.println(hm);
 
