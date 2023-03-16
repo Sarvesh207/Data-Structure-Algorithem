@@ -16,7 +16,7 @@ public class Sprialmatrix {
             for(int i=startRow; i<=endRow; i++){
                 System.out.print(arr[i][endCol]+" ");
             }endCol--;
-            // right to left
+            // right to left'
             for(int i=endCol; i>=startCol; i--){
                 System.out.print(arr[endRow][i]+" ");
             }
