@@ -278,7 +278,55 @@ public class ClassRoom {
         }
 
 
+        //kth accencetor
+
+        public static int KAncestor(Node root, int n, int k){
+            if(root == null){
+                return -1;
+            }
+            if(root.data == n){
+                return 0;
+            }
+            int leftDist = KAncestor(root.left, n, k);
+            int rightDist = KAncestor(root.right, n, k);
+            if(leftDist == -1 && rightDist == -1){
+                return -1;
+            }
+            int max = Math.max(leftDist, rightDist);
+            if(max+1 == k){
+                System.out.println(root.data);
+            }
+            return max+1;
+        }
+
+        //tarnsform to sum tree
+        public static int transform(Node root){
+        if(root == null){
+            return 0;
+        }
+            int leftChild = transform(root.left);
+            int rightChild = transform(root.right);
+
+            int data = root.data;
+
+            int newLeft = root.left == null? 0 : root.left.data;
+            int newRight = root.right == null? 0 : root.right.data;
+
+            root.data  = newLeft + leftChild + newRight + rightChild;
+            return data;
+        }
+
+        public static void preOrder(Node root){
+            if(root == null){
+                return;
+            }
+            System.out.print(root.data+" ");
+            preOrder(root.left);
+            preOrder(root.right);
+        }
+
         public static void main(String[] args) {
+
 
         /*    1
             /    \
@@ -309,9 +357,15 @@ public class ClassRoom {
 //        int k = 3;
 //        Klevel(root, 1, k );
 
-        int n1 = 4, n2 = 6;
+//            int n1 = 4, n2 = 6;
 //        System.out.println(lca2(root, n1, n2).data);
-            System.out.println(minDist(root, n1, n2));
+////            System.out.println(minDist(root, n1, n2));
+//       transform sum tree
+//            int n = 5, k = 1;
+//            KAncestor(root, n, k);
+
+            transform(root);
+            preOrder(root);
 
 
     }
